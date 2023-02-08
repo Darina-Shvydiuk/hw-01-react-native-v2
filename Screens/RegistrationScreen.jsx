@@ -94,13 +94,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    // backgroundColor: '#FFFFFF',
     
   },
   image: {
     flex: 1,
     resizeMode: 'cover',
-    // alignItems:'center',
   },
   imagePhoto: {
     position: 'absolute',
