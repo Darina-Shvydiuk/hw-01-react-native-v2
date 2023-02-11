@@ -1,15 +1,18 @@
-import { StatusBar } from "expo-status-bar";
-import LoginScreen from "./Screens/LoginScreen";
-import RegistrationScreen from './Screens/RegistrationScreen';
+import 'react-native-gesture-handler';
+
+import { NavigationContainer } from '@react-navigation/native';
+
+
+import { useRoute } from './router';
+
 
 export default function App() {
+  const routing = useRoute();
 
   return (
-    <>
-      <RegistrationScreen />
-      {/* <LoginScreen/> */}
-      <StatusBar style="auto" />
-    </>
+    <NavigationContainer>
+      {routing}
+  </NavigationContainer>
 
   );
 }
