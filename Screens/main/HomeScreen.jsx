@@ -15,6 +15,7 @@ export default HomeScreen = () => {
       tabBarShowLabel: false, tabBarStyle: { height: 83, paddingLeft: 80, paddingRight: 80, }
       }}>
       <MainTab.Screen options={{
+         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           return (
             <View
@@ -43,7 +44,7 @@ export default HomeScreen = () => {
         )
       }}
         name='PostsScreen' component={PostsScreen} />
-        <MainTab.Screen options={{
+      <MainTab.Screen options={{
           tabBarIcon:({ focused, color, size })=>{return (
             <View
               style={{
@@ -58,7 +59,7 @@ export default HomeScreen = () => {
           );}
         }}  name='CreatePostsScreen' component={CreatePostsScreen} />
         <MainTab.Screen  options={{
-     
+         headerShown: false,
         tabBarIcon:({ focused, color, size })=>{return (
           <View
             style={{
