@@ -1,10 +1,10 @@
 import { ImageBackground, StyleSheet, Text, TextInput, View, TouchableOpacity, Platform, KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Dimensions,Image,Button } from 'react-native';
-import { React, useState,useCallback,useEffect } from 'react';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import { React, useState,useEffect } from 'react';
+// import { useFonts } from 'expo-font';
+// import * as SplashScreen from 'expo-splash-screen';
 
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 const initialState = {
   email: '',
@@ -13,16 +13,15 @@ const initialState = {
 
 
 export default LoginScreen = ({navigation}) => {
-  console.log('navigation', navigation);
-  const bgImage = require('../../assets/images/photo-bg.png');
+  const bgImage = require('../../../assets/images/photo-bg.png');
   const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
   const [state, setState] = useState(initialState);
   const [dimensions, setDimensions] = useState(Dimensions.get('window').width);
   
-  const [fontsLoaded] = useFonts({
-    'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
-    'Roboto-Medium':require('../../assets/fonts/Roboto-Medium.ttf'),
-  })
+  // const [fontsLoaded] = useFonts({
+  //   'Roboto-Regular': require('../../../assets/fonts/Roboto-Regular.ttf'),
+  //   'Roboto-Medium':require('../../../assets/fonts/Roboto-Medium.ttf'),
+  // })
 
   useEffect(() => {
         const onChange = () => {
@@ -41,24 +40,24 @@ export default LoginScreen = ({navigation}) => {
     
   }
   const submit = () => {
-    console.log(state); 
+    // console.log(state); 
     setState(initialState);
     navigation.navigate('HomeScreen');
   }
 
-const onLayoutRootView = useCallback(async () => {
-  if (fontsLoaded) {
-    await SplashScreen.hideAsync();
-  }
-}, [fontsLoaded]);
+// const onLayoutRootView = useCallback(async () => {
+//   if (fontsLoaded) {
+//     await SplashScreen.hideAsync();
+//   }
+// }, [fontsLoaded]);
 
-if (!fontsLoaded) {
-  return null;
-}
+// if (!fontsLoaded) {
+//   return null;
+// }
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
-      <View style={styles.container} onLayout={onLayoutRootView}>
+      <View style={styles.container}>
         <ImageBackground source={bgImage} style={styles.image}>
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
             <View style={{ ...styles.form, marginBottom: isShowKeyBoard ? -240 : 0, width:dimensions }}>

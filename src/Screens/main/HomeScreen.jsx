@@ -1,21 +1,49 @@
 import React from 'react';
-import { View, Text, StyleSheet,TouchableOpacity,Button } from 'react-native';
+import { View, StyleSheet,TouchableOpacity} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import PostsScreen from './PostsScreen';
 import CreatePostsScreen from './CreatePostsScreen';
 import ProfileScreen from './ProfileScreen';
 import { Ionicons,Feather,MaterialIcons } from '@expo/vector-icons';
+// // import DefaultScreen from '../nested/DefaultScreen';
+// import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 const MainTab = createBottomTabNavigator();
 
-export default HomeScreen = () => {
+export default HomeScreen = ({navigation}) => {
   return (
 
-    <MainTab.Navigator screenOptions={{
-      tabBarShowLabel: false, tabBarStyle: { height: 83, paddingLeft: 80, paddingRight: 80, }
+    <MainTab.Navigator initialRouteName='PostsScreen' screenOptions={{
+      tabBarShowLabel: false, tabBarStyle: { height: 83, paddingLeft: 80, paddingRight: 80, },
+      headerTitleAlign: "center",
+      headerTitleStyle: {
+        fontFamily: "Roboto-Medium",
+        fontSize: 17,
+        lineHeight: 22,
+        letterSpacing: 0.7,
+        color: "#212121",
+      },
+      headerStyle: {
+        borderBottomWidth: 1,
+        borderColor: "rgba(0, 0, 0, 0.3)",
+      },
       }}>
-      <MainTab.Screen options={{
-         headerShown: false,
+      <MainTab.Screen
+        options={{
+          // tabBarStyle: ((route) => {
+          //   const routeName = getFocusedRouteNameFromRoute(route) ?? "";
+          //   if (routeName === "CommentsScreen" || routeName === "MapScreen") {
+          //     return { display: "none" };
+          //   }
+          //   return {
+          //     height: 85,
+          //     paddingLeft: 80,
+          //     paddingRight: 80,
+          //     borderTopWidth: 1,
+          //     borderColor: "rgba(0, 0, 0, 0.1)",
+          //   };
+          // })(route),
+        headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           return (
             <View
@@ -31,20 +59,13 @@ export default HomeScreen = () => {
               />
             </View>
           );
-        },
-        headerRight: () => (
-          <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={() => console.log('logOut')}
-        >
-          <View style={styles.logOut}>
-            <MaterialIcons name="logout" size={24} color="#BDBDBD" />
-          </View>
-        </TouchableOpacity>
-        )
+          },
+          headerShown: false
+        
       }}
         name='PostsScreen' component={PostsScreen} />
       <MainTab.Screen options={{
+         headerTitle: "Create Post",
           tabBarIcon:({ focused, color, size })=>{return (
             <View
               style={{
@@ -56,10 +77,24 @@ export default HomeScreen = () => {
              <Ionicons name="add" size={24}  color={focused ? "#ffffff" : "rgba(33, 33, 33, 0.8)"}/>
           </View>
           
-          );}
+        );
+        },
+        tabBarStyle: {
+          display: "none",
+        },
+        headerLeft: () => (
+          <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate('PostsScreen')}
+        >
+          <View style={styles.backBtn}>
+          <MaterialIcons name="keyboard-backspace" size={24} color="#BDBDBD" />
+          </View>
+        </TouchableOpacity>
+        )
         }}  name='CreatePostsScreen' component={CreatePostsScreen} />
         <MainTab.Screen  options={{
-         headerShown: false,
+          
         tabBarIcon:({ focused, color, size })=>{return (
           <View
             style={{
@@ -96,5 +131,9 @@ const styles = StyleSheet.create({
   logOut: {
     paddingHorizontal: 16,
     paddingVertical: 10,
-  }
+  },
+  backBtn: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
 })

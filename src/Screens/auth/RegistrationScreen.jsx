@@ -1,11 +1,7 @@
 import { ImageBackground, StyleSheet, Text, TextInput, View, TouchableOpacity, Platform, KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Dimensions,Image,Button } from 'react-native';
-import { React, useState,useCallback,useEffect } from 'react';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-
-
-
-SplashScreen.preventAutoHideAsync();
+import { React, useState, useCallback, useEffect } from 'react';
+import { authSignUpUser } from '../../redux/auth/authOperations';
+import { useDispatch } from "react-redux";
 
 const initialState = {
   login:'',
@@ -15,18 +11,14 @@ const initialState = {
 
 
 export default RegistrationScreen = ({ navigation }) => {
-  const bgImage = require('../../assets/images/photo-bg.png');
-  const imagePhoto = require('../../assets/images/rectangle22.png');
-  const icon = require('../../assets/images/add.png')
+  const bgImage = require('../../../assets/images/photo-bg.png');
+  const imagePhoto = require('../../../assets/images/rectangle22.png');
+  const icon = require('../../../assets/images/add.png')
   const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
-  const [state, setState] = useState(initialState);
+  const [credentials, setCredentials] = useState(initialState);
   const [dimensions, setDimensions] = useState(Dimensions.get('window').width);
+  // const dispatch = useDispatch();
   
-  const [fontsLoaded] = useFonts({
-    'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf'),
-    'Roboto-Medium': require('../../assets/fonts/Roboto-Medium.ttf'),
-  })
-
   useEffect(() => {
     const onChange = () => {
       const width = Dimensions.get('window').width;
@@ -44,26 +36,16 @@ export default RegistrationScreen = ({ navigation }) => {
     Keyboard.dismiss();
     
   }
-  const submit = () => {
-    console.log(state);
-    setState(initialState);
-
-    navigation.navigate('HomeScreen');
+  const handleSubmit = () => {
+    dispatch(authSignUpUser(credentials));
+    setCredentials(initialState);
+    // navigation.navigate('HomeScreen');
   }
 
-const onLayoutRootView = useCallback(async () => {
-  if (fontsLoaded) {
-    await SplashScreen.hideAsync();
-  }
-}, [fontsLoaded]);
-
-if (!fontsLoaded) {
-  return null;
-}
 
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
-      <View style={styles.container} onLayout={onLayoutRootView}>
+      <View style={styles.container}>
         <ImageBackground source={bgImage} style={styles.image}>
           <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
             <View style={{ ...styles.form, marginBottom: isShowKeyBoard ? -190 : 0, width:dimensions }}>
@@ -72,13 +54,13 @@ if (!fontsLoaded) {
               <Text style={styles.titleForm}>
                 Registration
               </Text>
-              <TextInput style={styles.input} textAlign={'start'} onFocus={() => { setIsShowKeyBoard(true) }} onChangeText={(value) => setState(prevState => ({ ...prevState, login: value }))} value={state.login} placeholder={ 'Login'} />
-              <TextInput style={styles.input} textAlign={'start'} onFocus={() => { setIsShowKeyBoard(true) }} onChangeText={(value) => setState(prevState => ({ ...prevState, email: value }))} value={state.email} placeholder={ 'Email'}/>
-              <TextInput style={styles.input} textAlign={'start'} onFocus={() => { setIsShowKeyBoard(true) }} onChangeText={(value) => setState(prevState => ({ ...prevState, password: value }))} value={state.password} placeholder={'Password'} />
+              <TextInput style={styles.input} textAlign={'start'} onFocus={() => { setIsShowKeyBoard(true) }} onChangeText={(value) => setCredentials(prevState => ({ ...prevState, login: value }))} value={credentials.login} placeholder={ 'Login'} />
+              <TextInput style={styles.input} textAlign={'start'} onFocus={() => { setIsShowKeyBoard(true) }} onChangeText={(value) => setCredentials(prevState => ({ ...prevState, email: value }))} value={credentials.email} placeholder={ 'Email'}/>
+              <TextInput style={styles.input} textAlign={'start'} onFocus={() => { setIsShowKeyBoard(true) }} onChangeText={(value) => setCredentials(prevState => ({ ...prevState, password: value }))} value={credentials.password} placeholder={'Password'} />
               <TouchableOpacity>
                 <Text style={styles.showPassword}>Show password</Text>
               </TouchableOpacity>
-              <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={submit}>
+              <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={handleSubmit}>
           <Text style={styles.btnTitle}>Sign Up</Text>
               </TouchableOpacity>
               <TouchableOpacity>
