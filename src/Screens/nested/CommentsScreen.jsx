@@ -1,17 +1,17 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import { View,  StyleSheet,TouchableOpacity,TextInput,TouchableWithoutFeedback,Keyboard,FlatList,Image,Text } from 'react-native';
 import {AntDesign } from '@expo/vector-icons';
 
 
 export default CommentsScreen = ({ navigation, route }) => {
-  // const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-  // useEffect(() => {
-  //   if (route.params) {
-  //     setPosts((prevState)=>[...prevState,route.params])
-  //   }
+  useEffect(() => {
+    if (route.params) {
+      setPosts((prevState)=>[...prevState,route.params])
+    }
    
-  // }, [route.params])
+  }, [route.params])
 
   const [isShownKeyboard, setIsShownKeyboard] = useState(false);
   const [allComments, setAllComments] = useState([]);

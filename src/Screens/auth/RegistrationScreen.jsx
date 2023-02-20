@@ -1,5 +1,5 @@
 import { ImageBackground, StyleSheet, Text, TextInput, View, TouchableOpacity, Platform, KeyboardAvoidingView,Keyboard,TouchableWithoutFeedback,Dimensions,Image,Button } from 'react-native';
-import { React, useState, useCallback, useEffect } from 'react';
+import { React, useState,useEffect } from 'react';
 import { authSignUpUser } from '../../redux/auth/authOperations';
 import { useDispatch } from "react-redux";
 
@@ -17,7 +17,7 @@ export default RegistrationScreen = ({ navigation }) => {
   const [isShowKeyBoard, setIsShowKeyBoard] = useState(false);
   const [credentials, setCredentials] = useState(initialState);
   const [dimensions, setDimensions] = useState(Dimensions.get('window').width);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   
   useEffect(() => {
     const onChange = () => {
@@ -39,7 +39,7 @@ export default RegistrationScreen = ({ navigation }) => {
   const handleSubmit = () => {
     dispatch(authSignUpUser(credentials));
     setCredentials(initialState);
-    // navigation.navigate('HomeScreen');
+    navigation.navigate('HomeScreen');
   }
 
 

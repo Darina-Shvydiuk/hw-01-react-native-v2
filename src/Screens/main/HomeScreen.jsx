@@ -30,6 +30,16 @@ export default HomeScreen = ({navigation}) => {
       }}>
       <MainTab.Screen
         options={{
+          headerRight: () => (
+            <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={logOut}
+          >
+            <View style={styles.logOut}>
+              <MaterialIcons name="logout" size={24} color="#BDBDBD" />
+            </View>
+          </TouchableOpacity>
+          ),
           // tabBarStyle: ((route) => {
           //   const routeName = getFocusedRouteNameFromRoute(route) ?? "";
           //   if (routeName === "CommentsScreen" || routeName === "MapScreen") {
@@ -60,8 +70,6 @@ export default HomeScreen = ({navigation}) => {
             </View>
           );
           },
-          headerShown: false
-        
       }}
         name='PostsScreen' component={PostsScreen} />
       <MainTab.Screen options={{
@@ -94,7 +102,7 @@ export default HomeScreen = ({navigation}) => {
         )
         }}  name='CreatePostsScreen' component={CreatePostsScreen} />
         <MainTab.Screen  options={{
-          
+           headerTitle: "Profile",
         tabBarIcon:({ focused, color, size })=>{return (
           <View
             style={{
