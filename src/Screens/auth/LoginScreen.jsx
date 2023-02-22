@@ -37,7 +37,6 @@ export default LoginScreen = ({navigation}) => {
   const handleSubmit = () => {
     dispatch(authSignInUser(credentials))
     setCredentials(initialState);
-    navigation.navigate('HomeScreen');
   }
 
 
@@ -134,7 +133,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     textAlign: 'center',
-    color:'#1B4371',
+    color: '#1B4371',
+    letterSpacing:0.5,
   },
   showPassword: {
     position: 'absolute',
@@ -146,9 +146,5 @@ const styles = StyleSheet.create({
     color:'#1B4371',
   },
   btnRegister: {
-    // fontFamily: 'Roboto-Regular',
-    // fontSize: 16,
-    // lineHeight: 19,
-    // color:'#1B4371',
   },
 });

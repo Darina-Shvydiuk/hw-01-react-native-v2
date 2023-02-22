@@ -7,6 +7,7 @@ import MapScreen from '../nested/MapScreen';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useDispatch } from "react-redux";
 import { authSignOutUser } from '../../redux/auth/authOperations';
+// import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 const NestedScreen = createStackNavigator();
 
@@ -16,21 +17,32 @@ export default PostsScreen = ({ route, navigation }) => {
     dispatch(authSignOutUser())
   }
   return (
-    <NestedScreen.Navigator  screenOptions={{
-      tabBarShowLabel: false,
-      headerTitleAlign: "center",
-      headerTitleStyle: {
-        fontFamily: "Roboto-Medium",
-        fontSize: 17,
-        lineHeight: 22,
-        letterSpacing: 0.7,
-        color: "#212121",
-      },
-      headerStyle: {
-        borderBottomWidth: 1,
-        borderColor: "rgba(0, 0, 0, 0.3)",
-      },
-      
+    <NestedScreen.Navigator screenOptions={{
+        tabBarShowLabel: false, tabBarStyle: { height: 83, paddingLeft: 80, paddingRight: 80, },
+        headerTitleAlign: "center",
+        headerTitleStyle: {
+          fontFamily: "Roboto-Medium",
+          fontSize: 17,
+          lineHeight: 22,
+          color: "#212121",
+        },
+        headerStyle: {
+          borderBottomWidth: 1,
+          borderColor: "rgba(0, 0, 0, 0.3)",
+        },
+        // tabBarStyle: ((route) => {
+        //   const routeName = getFocusedRouteNameFromRoute(route) ?? "";
+        //   if (routeName === "CommentsScreen" || routeName === "MapScreen") {
+        //     return {display: "none"};
+        //   }
+        //   return {
+        //     height: 85,
+        //     paddingLeft: 80,
+        //     paddingRight: 80,
+        //     borderTopWidth: 1,
+        //     borderColor: "rgba(0, 0, 0, 0.1)",
+        //   };
+        // })(route),
     }}
       initialRouteName='DefaultScreen'>
       <NestedScreen.Screen options={{
@@ -48,9 +60,12 @@ export default PostsScreen = ({ route, navigation }) => {
             )
           }} name='DefaultScreen' component={DefaultScreen } />
       <NestedScreen.Screen options={{
+       
+          tabBarStyle: {
+            display: "none",
+        },
         
         headerTitle: "Comments",
-        
         headerLeft: () => (
           <TouchableOpacity
           activeOpacity={0.8}
@@ -83,7 +98,6 @@ export default PostsScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor:'#fff',
   },
   logOut: {

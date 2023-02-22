@@ -5,45 +5,23 @@ import PostsScreen from './PostsScreen';
 import CreatePostsScreen from './CreatePostsScreen';
 import ProfileScreen from './ProfileScreen';
 import { Ionicons,Feather,MaterialIcons } from '@expo/vector-icons';
-// // import DefaultScreen from '../nested/DefaultScreen';
 // import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 const MainTab = createBottomTabNavigator();
 
-export default HomeScreen = ({navigation}) => {
+export default HomeScreen = ({ navigation,route }) => {
   return (
-
-    <MainTab.Navigator initialRouteName='PostsScreen' screenOptions={{
-      tabBarShowLabel: false, tabBarStyle: { height: 83, paddingLeft: 80, paddingRight: 80, },
-      headerTitleAlign: "center",
-      headerTitleStyle: {
-        fontFamily: "Roboto-Medium",
-        fontSize: 17,
-        lineHeight: 22,
-        letterSpacing: 0.7,
-        color: "#212121",
-      },
-      headerStyle: {
-        borderBottomWidth: 1,
-        borderColor: "rgba(0, 0, 0, 0.3)",
-      },
+    <MainTab.Navigator
+      initialRouteName='PostsScreen'
+      screenOptions={{
+      tabBarShowLabel: false, tabBarStyle: { height: 83, paddingLeft: 80, paddingRight: 80, }
       }}>
       <MainTab.Screen
         options={{
-          headerRight: () => (
-            <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={logOut}
-          >
-            <View style={styles.logOut}>
-              <MaterialIcons name="logout" size={24} color="#BDBDBD" />
-            </View>
-          </TouchableOpacity>
-          ),
           // tabBarStyle: ((route) => {
           //   const routeName = getFocusedRouteNameFromRoute(route) ?? "";
           //   if (routeName === "CommentsScreen" || routeName === "MapScreen") {
-          //     return { display: "none" };
+          //     return {tabBarStyle:{display: "none"}};
           //   }
           //   return {
           //     height: 85,
@@ -53,7 +31,8 @@ export default HomeScreen = ({navigation}) => {
           //     borderColor: "rgba(0, 0, 0, 0.1)",
           //   };
           // })(route),
-        headerShown: false,
+          headerShown: false,
+          
         tabBarIcon: ({ focused, color, size }) => {
           return (
             <View
@@ -101,7 +80,7 @@ export default HomeScreen = ({navigation}) => {
         </TouchableOpacity>
         )
         }}  name='CreatePostsScreen' component={CreatePostsScreen} />
-        <MainTab.Screen  options={{
+      <MainTab.Screen options={{
            headerTitle: "Profile",
         tabBarIcon:({ focused, color, size })=>{return (
           <View

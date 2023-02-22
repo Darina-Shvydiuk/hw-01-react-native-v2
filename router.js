@@ -4,10 +4,7 @@ import LoginScreen from "./src/Screens/auth/LoginScreen";
 import RegistrationScreen from './src/Screens/auth/RegistrationScreen';
 import HomeScreen from './src/Screens/main/HomeScreen';
 
-
 const AuthStack = createStackNavigator();
-
-
 
 export default useRoute = (isAuth) => {
   if (!isAuth) {
@@ -19,9 +16,6 @@ export default useRoute = (isAuth) => {
         <AuthStack.Screen options={{
           headerShown: false
         }} name='RegisterScreen' component={RegistrationScreen} />
-        <AuthStack.Screen options={{
-          headerShown: false
-        }} name='HomeScreen' component={HomeScreen} />
       </AuthStack.Navigator>
     );
   } 
